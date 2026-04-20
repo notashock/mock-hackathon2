@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "../api/axiosConfig";
 
 function ManagerDashboard() {
   const [desks, setDesks] = useState([]);
@@ -13,7 +14,7 @@ function ManagerDashboard() {
 
   const fetchDesks = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/desks");
+      const res = await API.get("/desks");
       setDesks(res.data);
     } catch (err) {
       console.error(err);
@@ -22,7 +23,7 @@ function ManagerDashboard() {
 
   const fetchAmenities = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/amenities");
+      const res = await API.get("/amenities");
       setAmenities(res.data);
     } catch (err) {
       console.error(err);
@@ -30,12 +31,12 @@ function ManagerDashboard() {
   };
 
   const approveAmenity = async (id) => {
-    await axios.put(`http://localhost:8080/api/amenity-reservations/${id}/approve`);
+    await API.put(`/amenity-reservations/${id}/approve`);
     fetchAmenities();
   };
 
   const rejectAmenity = async (id) => {
-    await axios.put(`http://localhost:8080/api/amenity-reservations/${id}/reject`);
+    await API.put(`/amenity-reservations/${id}/reject`);
     fetchAmenities();
   };
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "../api/axiosConfig";
 
 function BookDesk() {
   const [desks, setDesks] = useState([]);
@@ -13,7 +14,7 @@ function BookDesk() {
   }, []);
 
   const fetchAvailableDesks = async () => {
-    const res = await axios.get("http://localhost:8080/api/desks");
+    const res = await API.get("/desks");
     setDesks(res.data);
   };
 
@@ -27,10 +28,7 @@ function BookDesk() {
   const handleBook = async (e) => {
     e.preventDefault();
 
-    await axios.post(
-      "http://localhost:8080/api/bookings",
-      bookingData
-    );
+    await API.post("/bookings", bookingData);
 
     alert("Desk Booked Successfully");
   };

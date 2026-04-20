@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "../api/axiosConfig";
 
 function MemberDashboard() {
   const [bookings, setBookings] = useState([]);
@@ -15,9 +16,7 @@ function MemberDashboard() {
 
   const fetchBookings = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:8080/api/bookings/member/1"
-      );
+      const res = await API.get("/bookings/member/1");
 
       setBookings(res.data);
 

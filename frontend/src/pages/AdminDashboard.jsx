@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "../api/axiosConfig";
 
 function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -18,9 +19,7 @@ function AdminDashboard() {
 
   const fetchDashboardData = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:8080/api/admin/dashboard"
-      );
+      const res = await API.get("/admin/dashboard");
 
       setStats(res.data);
     } catch (error) {
@@ -30,10 +29,7 @@ function AdminDashboard() {
 
   const fetchRecentBookings = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:8080/api/bookings/recent"
-      );
-
+      const res = await API.get("/admin/bookings/recent");
       setRecentBookings(res.data);
     } catch (error) {
       console.error(error);

@@ -1,6 +1,7 @@
 // BookingHistory.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API from "../api/axiosConfig";
 
 function BookingHistory() {
   const [bookings, setBookings] = useState([]);
@@ -10,16 +11,12 @@ function BookingHistory() {
   }, []);
 
   const fetchBookings = async () => {
-    const res = await axios.get(
-      "http://localhost:8080/api/bookings/member/1"
-    );
+    const res = await API.get("/bookings/member/1");
     setBookings(res.data);
   };
 
   const cancelBooking = async (id) => {
-    await axios.delete(
-      `http://localhost:8080/api/bookings/${id}`
-    );
+    await API.delete(`/bookings/${id}`);
 
     fetchBookings();
   };
