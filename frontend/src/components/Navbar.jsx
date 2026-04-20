@@ -1,4 +1,3 @@
-// Navbar.jsx (Role Based Navbar)
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
@@ -12,18 +11,15 @@ function Navbar() {
 
   return (
     <nav className="bg-blue-600 text-white px-6 py-4 flex justify-between items-center shadow-md">
-      {/* Logo */}
       <h1 className="text-xl font-bold">
         Desk Booking System
       </h1>
 
-      {/* Right Side */}
       <div className="flex items-center gap-5">
         <span className="font-medium">
           {user?.name} ({user?.role})
         </span>
 
-        {/* Role Links */}
         {user?.role === "ADMIN" && (
           <Link to="/admin" className="hover:text-gray-200">
             Dashboard
