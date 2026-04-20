@@ -1,56 +1,70 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
+  const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    logout(); // Use the context function to clear state and localStorage safely
     navigate("/");
+  };
+
+  // Format role for display (e.g., "SPACE_MANAGER" -> "Space Manager")
+  const formatRole = (role) => {
+    if (!role) return "";
+    return role.replace("_", " ").toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
   };
 
   return (
     <nav className="bg-blue-600 text-white px-6 py-4 flex justify-between items-center shadow-md">
-      <h1 className="text-xl font-bold">
-        Desk Booking System
+      <h1 className="text-xl font-bold tracking-wide">
+        Synapse
       </h1>
 
-      <div className="flex items-center gap-5">
-        <span className="font-medium">
-          {user?.name} ({user?.role})
-        </span>
-
-        {user?.role === "ADMIN" && (
-          <Link to="/admin" className="hover:text-gray-200">
-            Dashboard
-          </Link>
+      <div className="flex items-center gap-6">
+        {user && (
+          <span className="font-medium bg-blue-700 px-3 py-1 rounded-md">
+            {user.name} <span className="text-blue-200 text-sm ml-1">({formatRole(user.role)})</span>
+          </span>
         )}
 
-        {user?.role === "MEMBER" && (
-          <>
-            <Link to="/member" className="hover:text-gray-200">
+        <div className="hidden md:flex gap-4">
+          {user?.role === "ADMIN" && (
+            <Link to="/admin" className="hover:text-gray-200 transition-colors">
               Dashboard
             </Link>
+          )}
 
-            <Link to="/bookdesk" className="hover:text-gray-200">
-              Book Desk
+          {user?.role === "MEMBER" && (
+            <>
+              <Link to="/dashboard" className="hover:text-gray-200 transition-colors">
+                Dashboard
+              </Link>
+              <Link to="/bookdesk" className="hover:text-gray-200 transition-colors">
+                Book Desk
+              </Link>
+            </>
+          )}
+
+          {/* Updated to SPACE_MANAGER */}
+          {user?.role === "SPACE_MANAGER" && (
+            <Link to="/manager" className="hover:text-gray-200 transition-colors">
+              Dashboard
             </Link>
-          </>
-        )}
-
-        {user?.role === "MANAGER" && (
-          <Link to="/manager" className="hover:text-gray-200">
-            Dashboard
-          </Link>
-        )}
+          )}
+        </div>
 
         {/* Logout */}
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
-        >
-          Logout
-        </button>
+        {user && (
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 px-4 py-2 rounded-md hover:bg-red-600 transition-colors font-medium shadow-sm"
+          >
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );

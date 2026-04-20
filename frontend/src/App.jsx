@@ -1,75 +1,79 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import { BookingProvider } from "./context/BookingContext";
 
+// Pages
 import Login from "./pages/Login";
-import Register from "./pages/Register";
-
 import AdminDashboard from "./pages/AdminDashboard";
 import MemberDashboard from "./pages/MemberDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
-
 import BookDesk from "./pages/BookDesk";
 import BookingHistory from "./pages/BookingHistory";
 
+// Components
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public */}
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+    <AuthProvider>
+      <BookingProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Public / Auth */}
+            <Route path="/" element={<Login />} />
 
-        {/* Admin */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute role="ADMIN">
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
+            {/* Admin Routes */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute role="ADMIN">
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
 
-        {/* Member */}
-        <Route
-          path="/member"
-          element={
-            <ProtectedRoute role="MEMBER">
-              <MemberDashboard />
-            </ProtectedRoute>
-          }
-        />
+            {/* Member Routes */}
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute role="MEMBER">
+                  <MemberDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bookdesk"
+              element={
+                <ProtectedRoute role="MEMBER">
+                  <BookDesk />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/booking-history"
+              element={
+                <ProtectedRoute role="MEMBER">
+                  <BookingHistory />
+                </ProtectedRoute>
+              }
+            />
 
-        {/* Manager */}
-        <Route
-          path="/manager"
-          element={
-            <ProtectedRoute role="MANAGER">
-              <ManagerDashboard />
-            </ProtectedRoute>
-          }
-        />
+            {/* Space Manager Routes */}
+            <Route
+              path="/manager"
+              element={
+                <ProtectedRoute role="SPACE_MANAGER">
+                  <ManagerDashboard />
+                </ProtectedRoute>
+              }
+            />
 
-        {/* Member Pages */}
-        <Route
-          path="/bookdesk"
-          element={
-            <ProtectedRoute role="MEMBER">
-              <BookDesk />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/booking-history"
-          element={
-            <ProtectedRoute role="MEMBER">
-              <BookingHistory />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+            {/* Catch-all route */}
+            <Route path="*" element={<Login />} />
+          </Routes>
+        </BrowserRouter>
+      </BookingProvider>
+    </AuthProvider>
   );
 }
 
