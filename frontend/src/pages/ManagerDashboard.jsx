@@ -30,7 +30,6 @@ function ManagerDashboard() {
     }
   }, [selectedWorkspace]);
 
-  // ✅ GET workspaces
   const fetchWorkspaces = async () => {
     try {
       const res = await API.get("/workspaces");
@@ -44,7 +43,6 @@ function ManagerDashboard() {
     }
   };
 
-  // ✅ GET desks
   const fetchDesks = async (id) => {
     try {
       const res = await API.get(`/desks?workspaceId=${id}`);
@@ -54,7 +52,6 @@ function ManagerDashboard() {
     }
   };
 
-  // ✅ GET amenity reservations
   const fetchReservations = async () => {
     try {
       const res = await API.get("/amenity-reservations");
@@ -64,7 +61,6 @@ function ManagerDashboard() {
     }
   };
 
-  // ✅ CREATE workspace
   const createWorkspace = async (e) => {
     e.preventDefault();
     try {
@@ -76,7 +72,6 @@ function ManagerDashboard() {
     }
   };
 
-  // ✅ CREATE desk
   const createDesk = async (e) => {
     e.preventDefault();
     try {
@@ -88,7 +83,6 @@ function ManagerDashboard() {
     }
   };
 
-  // ✅ APPROVE
   const approveAmenity = async (id) => {
     try {
       await API.put(`/amenity-reservations/${id}/approve`);
@@ -98,7 +92,26 @@ function ManagerDashboard() {
     }
   };
 
-  // ✅ REJECT
+  const createDesk = async (e) => {
+    e.preventDefault();
+    try {
+      await API.post("/desks", deskData);
+      fetchDesks(deskData.workspaceId);
+      setDeskData({ deskNumber: "", workspaceId: "" });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const approveAmenity = async (id) => {
+    try {
+      await API.put(`/amenity-reservations/${id}/approve`);
+      fetchReservations();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const rejectAmenity = async (id) => {
     try {
       await API.put(`/amenity-reservations/${id}/reject`);
@@ -120,7 +133,6 @@ function ManagerDashboard() {
             Manager Dashboard
           </h1>
 
-          {/* 🔹 Create Workspace */}
           <div className="bg-white p-6 rounded-xl shadow mb-8">
             <h2 className="text-xl font-semibold mb-4">
               Create Workspace
@@ -159,7 +171,6 @@ function ManagerDashboard() {
             </form>
           </div>
 
-          {/* 🔹 Add Desk */}
           <div className="bg-white p-6 rounded-xl shadow mb-8">
             <h2 className="text-xl font-semibold mb-4">
               Add Desk
@@ -203,7 +214,6 @@ function ManagerDashboard() {
             </form>
           </div>
 
-          {/* 🔹 Workspace + Desks */}
           <div className="bg-white p-6 rounded-xl shadow mb-8">
             <h2 className="text-xl font-semibold mb-4">
               Workspaces
@@ -233,7 +243,6 @@ function ManagerDashboard() {
             ))}
           </div>
 
-          {/* 🔹 Amenity Requests */}
           <div className="bg-white p-6 rounded-xl shadow">
             <h2 className="text-xl font-semibold mb-4">
               Amenity Requests

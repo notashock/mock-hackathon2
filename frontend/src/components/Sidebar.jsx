@@ -1,4 +1,3 @@
-// Sidebar.jsx (Role Based Sidebar)
 import { Link } from "react-router-dom";
 
 function Sidebar() {
@@ -11,7 +10,6 @@ function Sidebar() {
       </h2>
 
       <ul className="space-y-4">
-        {/* ADMIN */}
         {user?.role === "ADMIN" && (
           <>
             <li><Link to="/admin">Admin Dashboard</Link></li>
@@ -20,7 +18,6 @@ function Sidebar() {
           </>
         )}
 
-        {/* MEMBER */}
         {user?.role === "MEMBER" && (
           <>
             <li><Link to="/member">Member Dashboard</Link></li>
@@ -29,7 +26,6 @@ function Sidebar() {
           </>
         )}
 
-        {/* MANAGER */}
         {user?.role === "MANAGER" && (
           <>
             <li><Link to="/manager">Manager Dashboard</Link></li>
@@ -38,7 +34,6 @@ function Sidebar() {
           </>
         )}
 
-        {/* Logout */}
         <li>
           <Link to="/" className="text-red-500 font-semibold">
             Logout

@@ -18,16 +18,16 @@ function BookDesk() {
 
   useEffect(() => {
     fetchWorkspaces();
-    fetchAvailableDesks(); // ✅ all desks
+    fetchAvailableDesks(); 
+
   }, []);
 
   useEffect(() => {
     if (selectedWorkspace) {
-      fetchDesks(selectedWorkspace); // ✅ filtered desks
+      fetchDesks(selectedWorkspace); 
     }
   }, [selectedWorkspace]);
 
-  // ✅ GET all desks
   const fetchAvailableDesks = async () => {
     try {
       const res = await API.get("/desks");
@@ -37,7 +37,6 @@ function BookDesk() {
     }
   };
 
-  // ✅ GET workspaces
   const fetchWorkspaces = async () => {
     try {
       const res = await API.get("/workspaces");
@@ -51,7 +50,6 @@ function BookDesk() {
     }
   };
 
-  // ✅ GET desks by workspace
   const fetchDesks = async (id) => {
     try {
       const res = await API.get(`/desks?workspaceId=${id}`);
@@ -69,7 +67,6 @@ function BookDesk() {
     });
   };
 
-  // ✅ POST booking
   const handleBooking = async (e) => {
     e.preventDefault();
 
@@ -97,7 +94,6 @@ function BookDesk() {
           <div className="bg-white p-6 rounded-xl shadow w-96">
             <form onSubmit={handleBooking}>
               
-              {/* Workspace */}
               <select
                 value={selectedWorkspace}
                 onChange={(e) =>
@@ -113,7 +109,6 @@ function BookDesk() {
                 ))}
               </select>
 
-              {/* Desk */}
               <select
                 name="deskId"
                 onChange={handleChange}
@@ -128,7 +123,6 @@ function BookDesk() {
                 ))}
               </select>
 
-              {/* Date */}
               <input
                 type="date"
                 name="bookingDate"

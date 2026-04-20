@@ -22,7 +22,6 @@ function AdminDashboard() {
     fetchBookings();
   }, []);
 
-  // ✅ GET /api/users
   const fetchUsers = async () => {
     try {
       const res = await API.get("/users");
@@ -37,7 +36,6 @@ function AdminDashboard() {
     }
   };
 
-  // ✅ GET /api/users?role=MEMBER
   const fetchMembers = async () => {
     try {
       const res = await API.get("/users?role=MEMBER");
@@ -52,7 +50,6 @@ function AdminDashboard() {
     }
   };
 
-  // ✅ GET /api/bookings
   const fetchBookings = async () => {
     try {
       const res = await API.get("/bookings");
@@ -73,7 +70,6 @@ function AdminDashboard() {
     }
   };
 
-  // ✅ Confirm Booking
   const confirmBooking = async (id) => {
     try {
       await API.put(`/bookings/${id}/confirm`);
@@ -83,7 +79,6 @@ function AdminDashboard() {
     }
   };
 
-  // ✅ Cancel Booking
   const cancelBooking = async (id) => {
     try {
       await API.put(`/bookings/${id}/cancel`);
@@ -143,7 +138,6 @@ function AdminDashboard() {
             </div>
           </div>
 
-          {/* Users Table */}
           <div className="bg-white p-6 rounded-xl shadow mb-8">
             <h2 className="text-xl font-semibold mb-4">
               All Users
@@ -170,7 +164,6 @@ function AdminDashboard() {
             </table>
           </div>
 
-          {/* Bookings Table */}
           <div className="bg-white p-6 rounded-xl shadow">
             <h2 className="text-xl font-semibold mb-4">
               Booking Management

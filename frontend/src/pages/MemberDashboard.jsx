@@ -17,7 +17,7 @@ function MemberDashboard() {
     fetchBookings();
   }, []);
 
-  // ✅ GET /api/bookings
+  
   const fetchBookings = async () => {
     try {
       const res = await API.get("/bookings");
@@ -43,7 +43,7 @@ function MemberDashboard() {
     }
   };
 
-  // ✅ PUT /api/bookings/{id}/cancel
+  
   const cancelBooking = async (id) => {
     try {
       await API.put(`/bookings/${id}/cancel`);
@@ -60,13 +60,13 @@ function MemberDashboard() {
       <div className="flex">
         <Sidebar />
 
-        {/* Main */}
+
         <div className="flex-1 p-8">
           <h1 className="text-3xl font-bold mb-6">
             Welcome {user?.name}
           </h1>
 
-          {/* Stats */}
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="bg-white p-5 rounded-xl shadow">
               <h3 className="text-gray-500">Total Bookings</h3>

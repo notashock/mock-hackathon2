@@ -12,7 +12,6 @@ function BookingHistory() {
     fetchBookings();
   }, []);
 
-  // ✅ GET /api/bookings
   const fetchBookings = async () => {
     try {
       const res = await API.get("/bookings");
@@ -28,7 +27,6 @@ function BookingHistory() {
     }
   };
 
-  // ✅ PUT /api/bookings/{id}/cancel
   const cancelBooking = async (id) => {
     try {
       await API.put(`/bookings/${id}/cancel`);
