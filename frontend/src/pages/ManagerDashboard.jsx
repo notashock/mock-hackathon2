@@ -92,6 +92,26 @@ function ManagerDashboard() {
     }
   };
 
+  const createDesk = async (e) => {
+    e.preventDefault();
+    try {
+      await API.post("/desks", deskData);
+      fetchDesks(deskData.workspaceId);
+      setDeskData({ deskNumber: "", workspaceId: "" });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const approveAmenity = async (id) => {
+    try {
+      await API.put(`/amenity-reservations/${id}/approve`);
+      fetchReservations();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const rejectAmenity = async (id) => {
     try {
       await API.put(`/amenity-reservations/${id}/reject`);

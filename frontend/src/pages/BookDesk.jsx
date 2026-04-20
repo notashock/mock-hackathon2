@@ -19,6 +19,7 @@ function BookDesk() {
   useEffect(() => {
     fetchWorkspaces();
     fetchAvailableDesks(); 
+
   }, []);
 
   useEffect(() => {
