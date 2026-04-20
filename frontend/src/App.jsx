@@ -9,6 +9,8 @@ import MemberDashboard from "./pages/MemberDashboard";
 import ManagerDashboard from "./pages/ManagerDashboard";
 import BookDesk from "./pages/BookDesk";
 import BookingHistory from "./pages/BookingHistory";
+import ManageAmenities from "./pages/ManageAmenities";
+import RequestAmenity from "./pages/RequestAmenity";
 
 // Components
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -50,6 +52,14 @@ function App() {
               }
             />
             <Route
+              path="/request-amenity"
+              element={
+                <ProtectedRoute role="MEMBER">
+                  <RequestAmenity />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/booking-history"
               element={
                 <ProtectedRoute role="MEMBER">
@@ -67,8 +77,16 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/amenities"
+              element={
+                <ProtectedRoute role="SPACE_MANAGER">
+                  <ManageAmenities />
+                </ProtectedRoute>
+              }
+            />
 
-            {/* Catch-all route */}
+            {/* Catch-all route for bad URLs */}
             <Route path="*" element={<Login />} />
           </Routes>
         </BrowserRouter>

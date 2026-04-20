@@ -20,30 +20,58 @@ function Sidebar() {
       <ul className="space-y-4">
         {user?.role === "ADMIN" && (
           <>
-            {/* All Admin features are managed directly on the Admin Dashboard */}
-            <li><Link to="/admin" className="hover:text-blue-500 font-medium">Admin Dashboard</Link></li>
+            <li>
+              <Link to="/admin" className="hover:text-blue-500 font-medium transition-colors">
+                Admin Dashboard
+              </Link>
+            </li>
           </>
         )}
 
         {user?.role === "MEMBER" && (
           <>
-            <li><Link to="/dashboard" className="hover:text-blue-500 font-medium">Member Dashboard</Link></li>
-            <li><Link to="/bookdesk" className="hover:text-blue-500 font-medium">Book Desk</Link></li>
-            <li><Link to="/booking-history" className="hover:text-blue-500 font-medium">Booking History</Link></li>
+            <li>
+              <Link to="/dashboard" className="hover:text-blue-500 font-medium transition-colors">
+                Member Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/bookdesk" className="hover:text-blue-500 font-medium transition-colors">
+                Book Desk
+              </Link>
+            </li>
+            <li>
+              <Link to="/request-amenity" className="hover:text-blue-500 font-medium transition-colors">
+                Request Amenity
+              </Link>
+            </li>
+            <li>
+              <Link to="/booking-history" className="hover:text-blue-500 font-medium transition-colors">
+                Booking History
+              </Link>
+            </li>
           </>
         )}
 
         {user?.role === "SPACE_MANAGER" && (
           <>
-            {/* All Manager features (Workspaces, Desks, Amenities) are handled on this single page */}
-            <li><Link to="/manager" className="hover:text-blue-500 font-medium">Manager Dashboard</Link></li>
+            <li>
+              <Link to="/manager" className="hover:text-blue-500 font-medium transition-colors">
+                Manager Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/amenities" className="hover:text-blue-500 font-medium transition-colors">
+                Manage Amenities
+              </Link>
+            </li>
           </>
         )}
 
         <li className="pt-8 mt-8 border-t border-gray-200">
           <button 
             onClick={handleLogout} 
-            className="text-red-500 font-semibold hover:text-red-700 w-full text-left"
+            className="text-red-500 font-semibold hover:text-red-700 w-full text-left transition-colors"
           >
             Logout
           </button>
