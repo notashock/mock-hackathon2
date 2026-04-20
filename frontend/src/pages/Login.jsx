@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData); 
+    console.log(formData);
   };
 
   return (
@@ -45,6 +46,14 @@ function Login() {
         <button className="w-full bg-blue-500 text-white p-2 rounded">
           Login
         </button>
+
+        {/* Register Link */}
+        <p className="text-sm text-center mt-4">
+          Don’t have an account?{" "}
+          <Link to="/register" className="text-blue-500 font-semibold">
+            Register
+          </Link>
+        </p>
       </form>
     </div>
   );
